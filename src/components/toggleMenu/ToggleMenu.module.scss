@@ -1,0 +1,15 @@
+.editContainer {
+  position: relative;
+  .editButton {
+    $btnSize: 30px;
+    width: $btnSize;
+    height: $btnSize;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color .3s ease 0s;
+    &:hover {
+      background-color: darken(#ebecf0, 10%);
+    }
+  }
+}

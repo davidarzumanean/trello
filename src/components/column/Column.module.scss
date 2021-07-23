@@ -1,0 +1,34 @@
+$columnBg: #ebecf0;
+.columnContainer {
+    display: flex;
+    flex-direction: column;
+    width: 272px;
+    max-height: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: $columnBg;
+    margin: 0 10px;
+
+    .columnHeader {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 5px;
+    }
+    .columnName {
+        &:not(input) {
+            background: transparent;
+        }
+        border-radius: 3px;
+        height: 25px;
+        padding: 4px 8px;
+        resize: none;
+        flex-grow: 1;
+    }
+
+    .cardsContainer {
+        overflow-y: auto;
+        overflow-x: hidden;
+        flex: 1 1 auto;
+    }
+}

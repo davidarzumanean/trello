@@ -1,0 +1,20 @@
+.newItem{
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+
+  input {
+    width: 100%;
+  }
+  .actions {
+    margin-top: 5px;
+
+    button:first-child {
+      margin-right: 5px;
+    }
+  }
+
+  .toggleNew {
+    font-size: 16px;
+  }
+}

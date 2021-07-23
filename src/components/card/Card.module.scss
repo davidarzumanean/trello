@@ -1,0 +1,14 @@
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 6px 8px;
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+  .columnName {
+    flex-grow: 1;
+  }
+}
