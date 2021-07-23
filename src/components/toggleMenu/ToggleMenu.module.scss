@@ -26,6 +26,11 @@
     list-style-type: none;
     z-index: 10;
 
+    &.dropUp {
+      top: unset;
+      bottom: 100%;
+    }
+
     .actionItem {
       padding: 10px 15px;
       cursor: pointer;

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import dots from '../../assets/images/threeDots.js'
 import style from './ToggleMenu.module.scss'
 
-const ToggleMenu = ({ items }) => {
+const ToggleMenu = ({ items, dropUp }) => {
   const [isOpen, setIsOpen] = useState(false)
   
   const toggleMenu = () => {
@@ -20,7 +20,7 @@ const ToggleMenu = ({ items }) => {
         {dots}
       </div>
       {isOpen && 
-        <ul className={style.actionsContainer}>
+        <ul className={`${style.actionsContainer} ${dropUp ? style.dropUp : ''}`}>
           {items?.map(item => (
             <li className={style.actionItem} key={item.id} onClick={handleItemClick(item.doAction)}>
               {item.data}

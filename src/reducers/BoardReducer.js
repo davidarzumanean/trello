@@ -29,7 +29,7 @@ export const BoardReducer = (state, action) => {
         ]
       }
       return state
-      
+
     case 'SORT_BY_DATE_ASC':
       if (colIndex !== -1) {
         console.log(state[colIndex].items)
@@ -74,6 +74,16 @@ export const BoardReducer = (state, action) => {
             }
           ]
         }
+        return [
+          ...state
+        ]
+      }
+      return state
+
+    case 'DELETE_CARD':
+      if (colIndex !== -1) {
+        state[colIndex].items = state[colIndex].items?.filter(card => card.id !== cardId)
+
         return [
           ...state
         ]

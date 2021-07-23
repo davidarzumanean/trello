@@ -101,8 +101,8 @@ const Column = ({ column, children }) => {
       </div>
 
       <div className={style.cardsContainer}>
-        {column?.items?.map(item => (
-          <Card card={item} key={item.id} colId={column.id} />
+        {column?.items?.map((item, index) => (
+          <Card card={item} key={item.id} colId={column.id} index={index} total={column.items.length} />
         ))}
       </div>
 

@@ -18,6 +18,10 @@ export const editCardTitleAction = (dispatch, payload) => {
   dispatch({ type: 'EDIT_CARD_TITLE', ...payload })
 }
 
+export const deleteCardAction = (dispatch, payload) => {
+  dispatch({ type: 'DELETE_CARD', ...payload })
+}
+
 export const sortColByDateAsc = (dispatch, payload) => {
   dispatch({ type: 'SORT_BY_DATE_ASC', ...payload })
 }

@@ -1,11 +1,11 @@
 import { memo, useContext, useState } from 'react'
-import { editCardTitleAction } from '../../actions/BoardActions'
+import { deleteCardAction, editCardTitleAction } from '../../actions/BoardActions'
 import { BoardContext } from '../../contexts/BoardContext'
 import EditButton from '../toggleMenu/ToggleMenu'
 import InlineInput from '../InlineInput/InlineInput'
 import style from './Card.module.scss'
 
-const Card = ({ card, colId }) => {
+const Card = ({ card, colId, index, total }) => {
   const { dispatch } = useContext(BoardContext)
   const [isEditingTitle, setIsEditingTitle] = useState(false)
 
@@ -18,6 +18,24 @@ const Card = ({ card, colId }) => {
     setIsEditingTitle(false)
   }
 
+  const handleCardDelete = () => {
+    deleteCardAction(dispatch, { colId, cardId: card.id })
+    setIsEditingTitle(false)
+  }
+
+  const menuItems = [
+    {
+      id: 'editCard',
+      data: 'Edit title',
+      doAction: toggleTitleEdit,
+    },
+    {
+      id: 'deleteCard',
+      data: 'Delete Card',
+      doAction: handleCardDelete,
+    },
+  ]
+
   return (
     <div className={style.card}>
       {isEditingTitle
@@ -29,7 +47,7 @@ const Card = ({ card, colId }) => {
           :
           <div onClick={toggleTitleEdit} className={style.columnName}>{card.title}</div>
         }
-      <EditButton />
+      <EditButton items={menuItems} dropUp={total - index < 2} />
     </div>
   )
 }
