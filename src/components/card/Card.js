@@ -14,7 +14,7 @@ const Card = ({ card, colId }) => {
   }
 
   const handleTitleSave = (newTitle) => {
-    editCardTitleAction(dispatch, { column: { title: newTitle, colId, cardId: card.id } })
+    editCardTitleAction(dispatch, { title: newTitle, colId, cardId: card.id })
     setIsEditingTitle(false)
   }
 

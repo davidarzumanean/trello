@@ -9,7 +9,7 @@ const Board = () => {
   const { board, dispatch } = useContext(BoardContext)
 
   const handleAddNewCol = (title) => {
-    addColumnAction(dispatch, { column: { title } })
+    addColumnAction(dispatch, { title })
   }
 
   return (

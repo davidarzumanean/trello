@@ -12,4 +12,33 @@
       background-color: darken(#ebecf0, 10%);
     }
   }
+
+  .actionsContainer {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    min-width: 230px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 0;
+    margin: 5px 0 0;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, .5);
+    list-style-type: none;
+    z-index: 10;
+
+    .actionItem {
+      padding: 10px 15px;
+      cursor: pointer;
+      transition: background-color .3s ease 0s;
+      &:first-child {
+        border-radius: 5px 5px 0 0;
+      }
+      &:last-child {
+        border-radius: 0 0 5px 5px ;
+      }
+      &:hover {
+        background-color: darken(#ffffff, 10%);
+      }
+    }
+  }
 }

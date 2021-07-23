@@ -1,6 +1,14 @@
 import { memo, useState, useContext } from 'react'
 import { BoardContext } from '../../contexts/BoardContext'
-import { addCardAction, editColumnTitleAction } from '../../actions/BoardActions'
+import {
+  addCardAction,
+  deleteColumnAction,
+  editColumnTitleAction,
+  sortColByDateAsc,
+  sortColByDateDesc,
+  sortColByName
+} from '../../actions/BoardActions'
+
 import InlineInput from '../InlineInput/InlineInput.js'
 import NewItem from '../newItem/NewItem.js'
 import Card from '../card/Card'
@@ -12,7 +20,7 @@ const Column = ({ column, children }) => {
   const [isEditingTitle, setIsEditingTitle] = useState(false)
 
   const handleAddNewCard = (title) => {
-    addCardAction(dispatch, { card: { title, colId: column.id } })
+    addCardAction(dispatch, { title, colId: column.id })
   }
 
   const toggleTitleEdit = () => {
@@ -20,20 +28,52 @@ const Column = ({ column, children }) => {
   }
 
   const handleTitleSave = (newTitle) => {
-    editColumnTitleAction(dispatch, { column: { title: newTitle, colId: column.id } })
+    editColumnTitleAction(dispatch, { title: newTitle, colId: column.id })
     setIsEditingTitle(false)
   }
 
   const handleColumnDelete = () => {
-    
+    deleteColumnAction(dispatch, { colId: column.id })
+  }
+
+  const sortByDateAsc = () => {
+    sortColByDateAsc(dispatch, { colId: column.id })
+  }
+
+  const sortByDateDesc = () => {
+    sortColByDateDesc(dispatch, { colId: column.id })
+  }
+
+  const sortByName = () => {
+    sortColByName(dispatch, { colId: column.id })
   }
 
   const menuItems = [
-    <div onClick={toggleTitleEdit}>Edit column</div>,
-    <div>Delete column</div>,
-    <div>Date created (newest first)</div>,
-    <div>Date created (oldest first)</div>,
-    <div>Card name</div>,
+    {
+      id: 'editCol',
+      data: 'Edit column',
+      doAction: toggleTitleEdit,
+    },
+    {
+      id: 'deleteCol',
+      data: 'Delete column',
+      doAction: handleColumnDelete,
+    },
+    {
+      id: 'sortDateAsc',
+      data: 'Sort by date created ASC',
+      doAction: sortByDateAsc,
+    },
+    {
+      id: 'sortDateDesc',
+      data: 'Sort by date created DESC',
+      doAction: sortByDateDesc,
+    },
+    {
+      id: 'sortName',
+      data: 'Sort by card name',
+      doAction: sortByName,
+    },
   ]
 
   if (children) {
