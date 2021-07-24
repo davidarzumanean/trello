@@ -32,7 +32,6 @@ export const BoardReducer = (state, action) => {
 
     case 'SORT_BY_DATE_ASC':
       if (colIndex !== -1) {
-        console.log(state[colIndex].items)
         state[colIndex].items = state[colIndex].items?.sort((a, b) => b.createdAt - a.createdAt)
 
         return [

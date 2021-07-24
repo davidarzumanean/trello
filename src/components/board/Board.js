@@ -18,7 +18,7 @@ const Board = () => {
         <Column column={col} key={col.id} />
       ))}
       <Column>
-        <NewItem label='Add another column' onSave={handleAddNewCol} placeholder='Enter column title' />
+        <NewItem label='Add column' onSave={handleAddNewCol} placeholder='Enter column title' />
       </Column>
     </div>
   )
