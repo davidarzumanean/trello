@@ -102,6 +102,17 @@ export const BoardReducer = (state, action) => {
 
     case 'REMOVE_CARD':
       return state.filter(board => board.id !== action.id)
+
+    case 'MOVE_CARD':
+      const draggedItem = state[colIndex].items[cardIndex]
+      if (!draggedItem.id) return
+      const newState = [...state]
+      newState[colIndex] = {...state[colIndex], items: state[colIndex].items.filter(card => card.id !== cardId)}
+      const targetIndex = state.findIndex(item => item.id === action.targetColId)
+      newState[targetIndex] = {...state[targetIndex], items: [...state[targetIndex].items, draggedItem]} 
+
+      return [...newState]
+      
     default:
       return state
   }

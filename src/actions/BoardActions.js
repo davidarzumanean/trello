@@ -33,3 +33,7 @@ export const sortColByDateDesc = (dispatch, payload) => {
 export const sortColByName = (dispatch, payload) => {
   dispatch({ type: 'SORT_BY_NAME', ...payload })
 }
+
+export const moveCardAction = (dispatch, payload) => {
+  dispatch({ type: 'MOVE_CARD', ...payload })
+}

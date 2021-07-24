@@ -1,9 +1,10 @@
-import { memo, useState, useContext } from 'react'
+import React, { memo, useState, useContext } from 'react'
 import { BoardContext } from '../../contexts/BoardContext'
 import {
   addCardAction,
   deleteColumnAction,
   editColumnTitleAction,
+  moveCardAction,
   sortColByDateAsc,
   sortColByDateDesc,
   sortColByName
@@ -76,6 +77,22 @@ const Column = ({ column, children }) => {
     },
   ]
 
+  const onDragStart = (e, cardId, colId) => {
+    e.dataTransfer.setData("cardId", cardId);
+    e.dataTransfer.setData("colId", colId);
+  }
+
+  const onDragOver = (e) => {
+    e.preventDefault();
+  }
+
+  const onDrop = (e, targetColId) => {
+    let cardId = e.dataTransfer.getData("cardId");
+    let colId = e.dataTransfer.getData("colId");
+
+    if (colId !== targetColId) moveCardAction(dispatch, { cardId, colId, targetColId })
+  }
+
   if (children) {
     return (
       <div className={style.columnContainer}>
@@ -85,7 +102,10 @@ const Column = ({ column, children }) => {
   }
 
   return (
-    <div className={style.columnContainer}>
+    <div
+      className={style.columnContainer}
+      onDragOver={(e) => onDragOver(e)}
+      onDrop={(e) => onDrop(e, column.id)}>
       <div className={style.columnHeader}>
         {isEditingTitle
           ?
@@ -101,9 +121,17 @@ const Column = ({ column, children }) => {
       </div>
 
       <div className={style.cardsContainer}>
+        <React.StrictMode>
         {column?.items?.map((item, index) => (
-          <Card card={item} key={item.id} colId={column.id} index={index} total={column.items.length} />
+          <Card
+            onDragStart={onDragStart}
+            card={item}
+            key={item.id}
+            colId={column.id}
+            index={index}
+            total={column.items.length} />
         ))}
+        </React.StrictMode>
       </div>
 
       <NewItem label='Add a card' onSave={handleAddNewCard} placeholder='Enter card title' />

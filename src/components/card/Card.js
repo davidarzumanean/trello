@@ -5,7 +5,7 @@ import EditButton from '../toggleMenu/ToggleMenu'
 import InlineInput from '../InlineInput/InlineInput'
 import style from './Card.module.scss'
 
-const Card = ({ card, colId, index, total }) => {
+const Card = ({ card, colId, index, total, onDragStart }) => {
   const { dispatch } = useContext(BoardContext)
   const [isEditingTitle, setIsEditingTitle] = useState(false)
 
@@ -37,7 +37,7 @@ const Card = ({ card, colId, index, total }) => {
   ]
 
   return (
-    <div className={style.card}>
+    <div className={style.card} draggable onDragStart={(e) => onDragStart(e, card.id, colId)}>
       {isEditingTitle
           ?
           <InlineInput
@@ -47,7 +47,7 @@ const Card = ({ card, colId, index, total }) => {
           :
           <div onClick={toggleTitleEdit} className={style.columnName}>{card.title}</div>
         }
-      <EditButton items={menuItems} dropUp={total - index < 2} />
+      <EditButton items={menuItems} dropUp={total > 2 && total - index < 2} />
     </div>
   )
 }
